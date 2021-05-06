@@ -8,19 +8,25 @@ app = Flask(__name__)
 
 class MyLogger(object):
     def debug(self, msg):
-        print(msg)
+        print('debug - '+msg)
 
     def warning(self, msg):
-        print(msg)
+        print('warning - '+msg)
 
     def error(self, msg):
-        print(msg)
+        print('error - '+msg)
 
 
 download_dir = r'D:\YouTube'
 
+
+def hook(d):
+    print(d)
+
+
 ydl_opts = {
-    'outtmpl': os.path.join(download_dir, "%(uploader)s", "%(title)s.%(ext)s")
+    'outtmpl': os.path.join(download_dir, "%(uploader)s", "%(title)s.%(ext)s"),
+    'progress_hooks': [hook]
 }
 
 
