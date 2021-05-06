@@ -20,7 +20,7 @@ class MyLogger(object):
 download_dir = r'D:\YouTube'
 
 ydl_opts = {
-    'outtmpl': os.sep.join((download_dir, "%(uploader)s", "%(title)s"))
+    'outtmpl': os.path.join(download_dir, "%(uploader)s", "%(title)s.%(ext)s")
 }
 
 
