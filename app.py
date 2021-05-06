@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, request, render_template, redirect
 import youtube_dl
 
@@ -15,8 +17,10 @@ class MyLogger(object):
         print(msg)
 
 
+download_dir = r'D:\YouTube'
+
 ydl_opts = {
-    'logger': MyLogger()
+    'outtmpl': os.sep.join((download_dir, "%(uploader)s", "%(title)s"))
 }
 
 
