@@ -12,7 +12,8 @@ download_dir = r'D:\YouTube'
 
 
 ydl_opts = {
-    'outtmpl': os.path.join(download_dir, "%(uploader)s", "%(title)s.%(ext)s")
+    'outtmpl': os.path.join(download_dir, "%(uploader)s", "%(title)s.%(ext)s"),
+    'noplaylist': True
 }
 
 
@@ -24,7 +25,13 @@ def home():
 @app.route('/download', methods=['POST'])
 def download():
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-        ydl.download([request.form['url']])
+        url = request.form['url']
+
+        info = ydl.extract_info(url, download=False, process=False)
+
+        # Only download if it's a single video, not a channel or a playlist
+        if info['webpage_url_basename'] == 'watch':
+            ydl.download([url])
     return "Download complete", 200
 
 
