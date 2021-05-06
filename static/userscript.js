@@ -25,11 +25,11 @@
                 body: params
             })
             .then(() => {
-                // todo: check response
+                console.log("Download successful");
             })
-            .catch(() => {
-                // todo: handle this
-            })
+            .catch((err) => {
+                console.log(err);
+            });
     }
 
     let currentUrl;
